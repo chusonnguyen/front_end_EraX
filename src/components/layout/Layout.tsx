@@ -9,45 +9,45 @@ import axios from 'axios'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 
 interface Data {
-  id:number,
-  zone_id:number,
-  crate_label:string,
-  tracking:number,
-  stacked:string,
-  width:number,
-  length:number,
-  x:number,
-  y:number,
-  rotation:number
+  id: number,
+  zone_id: number,
+  crate_label: string,
+  tracking: number,
+  stacked: string,
+  width: number,
+  length: number,
+  x: number,
+  y: number,
+  rotation: number
 }
 
 interface Play {
-  id:number,
-  zone_id:number,
-  crate_label:string,
-  tracking:number,
-  stacked:string,
-  width:number,
-  length:number,
-  x:number,
-  y:number,
-  rotation:number
+  id: number,
+  zone_id: number,
+  crate_label: string,
+  tracking: number,
+  stacked: string,
+  width: number,
+  length: number,
+  x: number,
+  y: number,
+  rotation: number
 }
 
 interface Pole {
-  id:number,
-  width:number,
-  length:number,
-  x:number,
-  y:number
+  id: number,
+  width: number,
+  length: number,
+  x: number,
+  y: number
 }
 
 interface Ailse {
-  id:number,
-  width:number,
-  length:number,
-  x:number,
-  y:number
+  id: number,
+  width: number,
+  length: number,
+  x: number,
+  y: number
 }
 
 const Layout = () => {
@@ -65,7 +65,7 @@ const Layout = () => {
   const [dataPlay, setDataPlay] = useState<Play[]>([])
   const [dataPole, setDataPole] = useState<Pole[]>([])
   const [dataAilse, setDataAilse] = useState<Ailse[]>([])
-  const [width, setWidth] =useState()
+  const [width, setWidth] = useState()
   const [length, setLength] = useState()
   const { id } = useParams()
 
@@ -111,7 +111,7 @@ const Layout = () => {
         if (response.status === 200) {
           setIsLoading(false)
         }
-        if(response.data.message === 'File successfully uploaded') {
+        if (response.data.message === 'File successfully uploaded') {
           window.location.reload();
         }
       },
@@ -129,10 +129,10 @@ const Layout = () => {
     }).then(
       (res) => {
         console.log(res.status);
-        if(res.status === 200) {
+        if (res.status === 200) {
           setDataAilse(res.data)
           setIsLoadingAilse(false)
-          
+
         }
         console.log(dataAilse)
       }
@@ -147,10 +147,10 @@ const Layout = () => {
     }).then(
       (res) => {
         console.log(res.status);
-        if(res.status === 200) {
+        if (res.status === 200) {
           setDataMap(res.data)
           setIsLoadingLayout(false)
-          
+
         }
         console.log(dataMap)
       }
@@ -165,10 +165,10 @@ const Layout = () => {
     }).then(
       (res) => {
         console.log(res.status);
-        if(res.status === 200) {
+        if (res.status === 200) {
           setDataPole(res.data)
           setIsLoadingPole(false)
-          
+
         }
         console.log(dataPole)
       }
@@ -184,10 +184,11 @@ const Layout = () => {
     }).then(
       (res) => {
         console.log("playground: " + res.status)
-        if(res.status === 200) {
+        if (res.status === 200) {
           setDataPlay(res.data)
           setIsLoadingPlayground(false)
-      }}
+        }
+      }
     )
   }
 
@@ -197,48 +198,71 @@ const Layout = () => {
         'x-access-token': `${token}`
       }
     })
-    .then((res: any) => {
-      console.log(res.status)
-      if(res.status == 200) {
+      .then((res: any) => {
+        console.log(res.status)
+        if (res.status == 200) {
 
-        setWidth(res.data[0].width)
-        setLength(res.data[0].length)
-      }
-      if(res.status == 401) {
-        localStorage.clear()
-        navigate('/login')
-      }
-      
-    },
-      (error) => {
-        console.log(error)
-      }
-    )
+          setWidth(res.data[0].width)
+          setLength(res.data[0].length)
+        }
+        if (res.status == 401) {
+          localStorage.clear()
+          navigate('/login')
+        }
+
+      },
+        (error) => {
+          console.log(error)
+        }
+      )
   }
 
-  
-  const ratio = 25
+
+  const ratio = 35
   const map_data = dataMap
   const pole_data = dataPole
   const ailse_data = dataAilse
 
   const boxes = dataPlay
 
-  const boxses_final = boxes.map(box => {
-
+  const ailse_final = ailse_data.map(ailse => {
     return {
-      x: box.x * ratio,
-      y: box.y * ratio,
-      w: box.width * ratio,
-      h: box.length * ratio,
-      stacked: box.rotation,
-      label: box.crate_label
+      id: ailse.id,
+      width: ailse.width,
+      length: ailse.length,
+      x: ailse.x,
+      y: ailse.y
+    }
+  })
+
+  const poles_final = pole_data.map(pole => {
+    return {
+      id: pole.id,
+      width: pole.width* ratio,
+      length: pole.length* ratio,
+      x: pole.x* ratio,
+      y: pole.y* ratio
+    }
+  })
+
+  const boxses_final = boxes.map(box => {
+    return {
+      id: box.id,
+      zone_id: box.zone_id,
+      crate_label: box.crate_label,
+      tracking: box.tracking,
+      stacked: box.stacked,
+      width: box.width * ratio,
+      length: box.length* ratio,
+      x: box.x* ratio,
+      y: box.y* ratio,
+      rotation: box.rotation
     }
   })
 
   function renderPlayground() {
     if (isLoadingPlayground == false) {
-      return <Playground boxses_final={boxses_final} width_data={width} length_data={length}/>
+      return <Playground boxses_final={boxses_final} poles_final={poles_final} ailse_final={ailse_final} width_data={width} length_data={length} />
     } else {
       return <h2>NULL DATA</h2>
     }
@@ -251,14 +275,11 @@ const Layout = () => {
     renderPlayground()
     fetchPole()
     fetchZone()
-  },[])
-
-
-
+  }, [])
 
   return (
     <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 p-6 bg-white overflow-y-auto'>
-      <div className='col-span-4 flex justify-between items-center'>
+      <div className='col-span-4 flex justify-between items-center flex-col md:flex-row'>
         <nav className="flex" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li className="inline-flex items-center">
@@ -293,7 +314,7 @@ const Layout = () => {
                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                     clip-rule="evenodd"></path>
                 </svg>
-                <NavLink to={`/project/${id}/zone/${id}`}
+                <NavLink to={`/project/${id}`}
                   className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">
                   Zones</NavLink>
               </div>
@@ -311,22 +332,22 @@ const Layout = () => {
             </li>
           </ol>
         </nav>
-        <button className='px-6 py-3 rounded-lg bg-intel-blue hover:bg-blue-800 text-white' onClick={() =>
+        <button className='mt-6 md:mt-0 px-6 py-3 rounded-lg bg-intel-blue hover:bg-blue-800 text-white' onClick={() =>
           setOpenModal(true)}>Upload layout</button>
       </div>
-      
-          <div className='flex flex-col justify-start items-start w-full gap-10 col-span-4 lg:col-span-3'>
-          <div className='lg:col-span-3 col-span-4 grid grid-cols-1 md:grid-cols-3 gap-10 w-full'>
-            <RawList map_data={map_data} />
-            <div className='col-span-4 md:col-span-2'>
-              <Map map_data={map_data} ailse_data={dataAilse} pole_data={dataPole} width_data={width} length_data={length}/>
-            </div>
+
+      <div className='flex flex-col justify-start items-start w-full gap-10 col-span-4 lg:col-span-3'>
+        <div className='lg:col-span-3 col-span-4 grid grid-cols-1 md:grid-cols-3 gap-10 w-full'>
+          <RawList map_data={map_data} />
+          <div className='col-span-4 md:col-span-2'>
+            <Map map_data={map_data} ailse_data={dataAilse} pole_data={dataPole} width_data={width} length_data={length} />
           </div>
-          
-          <div className='w-full'>
-            {renderPlayground()}
-          </div>
-        </div>   
+        </div>
+
+        <div className='w-full'>
+          {renderPlayground()}
+        </div>
+      </div>
 
       <div className='flex flex-col gap-10 justify-start items-start col-span-4 md:col-span-1'>
         <GlobalVariable />
@@ -344,7 +365,7 @@ const Layout = () => {
             </div>
             <div className='h-full overflow-y-auto'>
 
-              
+
               <div className="md:grid md:grid-cols-3 md:gap-6 lg:divide-x">
                 <div className="md:col-span-1">
                   <div className="px-4 sm:px-0">
@@ -384,7 +405,7 @@ const Layout = () => {
                         </div>
                       </div>
                       <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                        <button onClick={handleSubmit} type="submit" className={`${isLoading ? "animate-spin" : ""}
+                        <button onClick={handleSubmit} type="submit" className={`${isLoading ? "animate-pulse" : ""}
                       inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium
                       rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
                       focus:ring-offset-2 focus:ring-indigo-500`}>Upload</button>

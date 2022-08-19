@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 
+
 const Header = () => {
   let navigate = useNavigate()
 
@@ -14,7 +15,7 @@ const Header = () => {
   const token=localStorage.getItem('token')
 
   const ref = useRef(null);
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event:any) => {
     if (ref.current && !ref.current.contains(event.target)) {
       setOpenDropdown(false);
     }
@@ -121,7 +122,7 @@ const Header = () => {
               </div>
               
               <div className='flex flex-col divide-y w-full'>
-                { projectData.filter((project:any) => {
+                { projectData.filter((project:Project) => {
                     if (searchInput == "") {
                       return searchInput
                     } else if (project.project_name.toLowerCase().includes(searchInput.toLowerCase())) {

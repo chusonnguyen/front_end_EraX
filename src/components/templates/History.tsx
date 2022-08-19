@@ -83,7 +83,7 @@ const History = () => {
       </div>
       <div className='flex flex-col w-full gap-6 mb-16 text-lg'>
         <div className='w-full grid grid-cols-12 items-center border rounded-lg p-4'>
-          <div className='flex flex-col'>
+          <div className='hidden md:flex flex-col'>
             <span className='font-bold'>ID</span>
           </div>
           <div className='flex flex-col col-span-6'>
@@ -100,7 +100,7 @@ const History = () => {
           {history.map(h => {
             return (
               <div className='w-full grid grid-cols-12 items-center border rounded-lg p-4 text-sm hover:shadow-lg'>
-                <div className='flex flex-col'>
+                <div className='md:flex flex-col hidden'>
                   <span>{h.id}</span>
                 </div>
                 <div className='flex flex-col col-span-6'>

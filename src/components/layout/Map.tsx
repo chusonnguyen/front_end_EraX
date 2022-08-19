@@ -30,9 +30,10 @@ interface AilseItem {
 }
 
 const Map = (props: { map_data: CrateItem[], ailse_data:AilseItem[] ,pole_data:PoleItem[], width_data: any, length_data: any }) => {
-  const ratio = 20
+  const ratio = 24
   const width = parseFloat(props.width_data)
   const length = parseFloat(props.length_data)
+  console.log(props.map_data)
   return (
     <div className='bg-white flex flex-col justify-start items-start w-full gap-4'>
       <span className='font-bold text-2xl'>Layout</span>
@@ -113,20 +114,20 @@ const Map = (props: { map_data: CrateItem[], ailse_data:AilseItem[] ,pole_data:P
                   y={crate.y * ratio}
                   width={w * ratio}
                   height={l * ratio}
-                  fill={crate.stacked ? "#F3DA0B" : "#fc1c6e"}
+                  fill={crate.stacked ? "#ffffff" : "#fc1c6e"}
                   className='hover:stroke-[#d3d3d3] hover:fill-[rgba(255,255,255,0.4)] cursor-pointer' />
 
                 {crate.stacked === 'Yes' ?
-                  <text
-                    x={(crate.x * ratio + (w * ratio / 2.8))}
-                    y={(crate.y * ratio + (l * ratio / 1.8))}
+                  <text 
+                    x={(crate.x * ratio + (w * ratio / 7.5))}
+                    y={(crate.y * ratio + (l * ratio / 1.75))}
                     font-size={ratio / 2}
                     fill="black"
                     className='pointer-events-none'>
                     {crate.tracking}
                   </text> :
                   <text
-                    x={(crate.x * ratio + (w * ratio / 2.3))}
+                    x={(crate.x * ratio + (w * ratio / 2.7))}
                     y={(crate.y * ratio + (l * ratio / 1.8))}
                     font-size={ratio / 2} fill="black"
                     className='pointer-events-none'>

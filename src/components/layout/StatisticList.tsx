@@ -2,13 +2,14 @@ import React, {useEffect,useState} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
+
 const StatisticList = () => {
     const token = localStorage.getItem('token')
     const { id } = useParams()
 
     const [dataMap, setDataMap] = useState([])
     const fetchLayout = async () => {
-        await axios.get(`http://127.0.0.1:5000/layout/zoneid=${id}`, {
+        await axios.get(`http://127.0.0.1:5000/playground/zoneid=${id}`, {
           headers: {
             'x-access-token': `${token}`
           }
@@ -37,7 +38,7 @@ const StatisticList = () => {
                 <span className='col-span-2'>Create Label</span>
                 <span>x (m)</span>
                 <span>y (m)</span>
-                <span className='col-span-2'>Edit</span>
+                <span className='col-span-2'>Stack</span>
                 </div>  
                 <div className='border-b-[1px] w-full my-2'></div>
                 <div className='flex flex-col justify-between w-full items-center gap-4 max-h-[500px] overflow-y-auto scrollbar-hide'>

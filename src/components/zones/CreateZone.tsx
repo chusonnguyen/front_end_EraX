@@ -166,82 +166,16 @@ return (
 
                                         <div className="col-span-3">
                                             <label htmlFor="zone-length"
-                                                className="block text-sm font-medium text-gray-700">Width</label>
+                                                className="block text-sm font-medium text-gray-700">Zone Width</label>
                                             <input onChange={onChangeInputZoneWidth} type="text" name="zone-length" id="zone-length"
-                                                autoComplete="given-name"
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Gap Width'/>
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Zone Width'/>
                                         </div>
 
                                         <div className="col-span-3">
                                             <label htmlFor="zone-height"
-                                                className="block text-sm font-medium text-gray-700">Length</label>
+                                                className="block text-sm font-medium text-gray-700">Zone Length</label>
                                             <input onChange={onChangeInputZoneLength} type="text" name="zone-height" id="zone-height"
-                                                autoComplete="given-name"
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Gap Length'/>
-                                        </div>
-
-                                        <div className="col-span-2 sm:col-span-1">
-                                            <label htmlFor="zone-width"
-                                                className="block text-sm font-medium text-gray-700">Total Poll</label>
-                                            <input onChange={onChangeInputTotalPoll} type="text" name="Total Poll" id="Total Poll"
-                                                autoComplete="given-name"
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Total Poll'/>
-                                        </div>
-
-                                        <div className="col-span-2 sm:col-span-1">
-                                            <label htmlFor="zone-height"
-                                                className="block text-sm font-medium text-gray-700">Poll row</label>
-                                            <input onChange={onChangeInputPollRow} type="text" name="Poll row" id="Poll row"
-                                                autoComplete="given-name"
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll row'/>
-                                        </div>
-
-                                        <div className="col-span-2 sm:col-span-1">
-                                            <label htmlFor="zone-height"
-                                                className="block text-sm font-medium text-gray-700">Poll X</label>
-                                            <input onChange={onChangeInputPollX} type="text" name="Poll X" id="Poll X"
-                                                autoComplete="given-name"
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll X'/>
-                                        </div>
-
-                                        <div className="col-span-2 sm:col-span-1">
-                                            <label htmlFor="zone-height"
-                                                className="block text-sm font-medium text-gray-700">Poll Y</label>
-                                            <input onChange={onChangeInputPollY} type="text" name="Poll Y" id="Poll Y"
-                                                autoComplete="given-name"
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll Y'/>
-                                        </div>
-
-                                        <div className="col-span-2 sm:col-span-1">
-                                            <label htmlFor="zone-height"
-                                                className="block text-sm font-medium text-gray-700">Poll Width</label>
-                                            <input onChange={onChangeInputPollW} type="text" name="Poll Width" id="Poll Width"
-                                                autoComplete="given-name"
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll Width'/>
-                                        </div>
-
-                                        <div className="col-span-2 sm:col-span-1">
-                                            <label htmlFor="zone-height"
-                                                className="block text-sm font-medium text-gray-700">Poll Length</label>
-                                            <input onChange={onChangeInputPollL} type="text" name="Poll Length" id="Poll Length"
-                                                autoComplete="given-name"
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll Length'/>
-                                        </div>
-
-                                        <div className="col-span-2 sm:col-span-1">
-                                            <label htmlFor="zone-height"
-                                                className="block text-sm font-medium text-gray-700">Poll Gap</label>
-                                            <input onChange={onChangeInputPollGap} type="text" name="Poll Gap" id="Poll Gap"
-                                                autoComplete="given-name"
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll Gap'/>
-                                        </div>
-
-                                        <div className="col-span-2 sm:col-span-1">
-                                            <label htmlFor="zone-height"
-                                                className="block text-sm font-medium text-gray-700">Poll Row Gap</label>
-                                            <input onChange={onChangeInputPollRowGap} type="text" name="Poll Row Gap" id="Poll Row Gap"
-                                                autoComplete="given-name"
-                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll Row Gap'/>
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Zone Length'/>
                                         </div>
 
                                         <div className="col-span-6">
@@ -251,9 +185,85 @@ return (
                                                 autoComplete="street-address"
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" />
                                         </div>
-
-                                        
                                     </div>
+
+                                    {/* POLL */}
+                                    <div className='my-6 font-bold text-xl'>Pole</div>
+                                    
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <div className="col-span-2 sm:col-span-1">
+                                            <label htmlFor="zone-height"
+                                                className="block text-sm font-medium text-gray-700">Total Row</label>
+                                            <span className='text-xs text-gray-400 italic'>The total row of pole. For example: 1, 3, 6,...</span>
+                                            <input onChange={onChangeInputPollRow} type="text" name="Poll row" id="Poll row"
+                                                autoComplete="given-name"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Total Row'/>
+                                        </div>
+
+                                        <div className="col-span-2 sm:col-span-1">
+                                            <label htmlFor="zone-width"
+                                                className="block text-sm font-medium text-gray-700">Total Pole</label>
+                                                <span className='text-xs text-gray-400 italic'>The total pole for each row. For example: 1, 4, 5,...</span>
+                                            <input onChange={onChangeInputTotalPoll} type="text" name="Total Poll" id="Total Poll"
+                                                autoComplete="given-name"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Total Pole'/>
+                                        </div>
+
+                                        <div className="col-span-2 sm:col-span-1">
+                                            <label htmlFor="zone-height"
+                                                className="block text-sm font-medium text-gray-700">Row X-axis</label>
+                                                <span className='text-xs text-gray-400 italic'>X coordinator of the row of pole. For example: 1, 4, 5,...</span>
+                                            <input onChange={onChangeInputPollX} type="text" name="Poll X" id="Poll X"
+                                                autoComplete="given-name"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll X'/>
+                                        </div>
+
+                                        <div className="col-span-2 sm:col-span-1">
+                                            <label htmlFor="zone-height"
+                                                className="block text-sm font-medium text-gray-700">Row Y-axis</label>
+                                                <span className='text-xs text-gray-400 italic'>Y coordinator of the row of pole. For example: 1, 4, 5,...</span>
+                                            <input onChange={onChangeInputPollY} type="text" name="Poll Y" id="Poll Y"
+                                                autoComplete="given-name"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll Y'/>
+                                        </div>
+
+                                        <div className="col-span-2 sm:col-span-1">
+                                            <label htmlFor="zone-height"
+                                                className="block text-sm font-medium text-gray-700">Pole Width</label>
+                                                <span className='text-xs text-gray-400 italic'>The width of the poles. For example: 1, 4, 5,...</span>
+                                            <input onChange={onChangeInputPollW} type="text" name="Poll Width" id="Poll Width"
+                                                autoComplete="given-name"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll Width'/>
+                                        </div>
+
+                                        <div className="col-span-2 sm:col-span-1">
+                                            <label htmlFor="zone-height"
+                                                className="block text-sm font-medium text-gray-700">Poll Length</label>
+                                                <span className='text-xs text-gray-400 italic'>The length of the poles. For example: 1, 4, 5,...</span>
+                                            <input onChange={onChangeInputPollL} type="text" name="Poll Length" id="Poll Length"
+                                                autoComplete="given-name"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll Length'/>
+                                        </div>
+
+                                        <div className="col-span-2 sm:col-span-1">
+                                            <label htmlFor="zone-height"
+                                                className="block text-sm font-medium text-gray-700">Row Gap</label>
+                                                <span className='text-xs text-gray-400 italic'>The gap between each row of pole. For example: 1, 4, 5,...</span>
+                                            <input onChange={onChangeInputPollRowGap} type="text" name="Poll Row Gap" id="Poll Row Gap"
+                                                autoComplete="given-name"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll Row Gap'/>
+                                        </div>
+
+                                        <div className="col-span-2 sm:col-span-1">
+                                            <label htmlFor="zone-height"
+                                                className="block text-sm font-medium text-gray-700">Pole Gap</label>
+                                                <span className='text-xs text-gray-400 italic'>The gap between each pole on the same row. For example: 1, 4, 5,...</span>
+                                            <input onChange={onChangeInputPollGap} type="text" name="Poll Gap" id="Poll Gap"
+                                                autoComplete="given-name"
+                                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Poll Gap'/>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </form>

@@ -16,11 +16,11 @@ const Overview = (props:any) => {
                     <span className='font-semibold text-gray-500'>{props.totalZone}</span>
                 </div>
                 <div className='w-full flex justify-between items-center'>
-                    <span className='font-semibold text-base lg:text-lg'>Average Usable Space</span>
+                    <span className='font-semibold text-base lg:text-lg'>Total Usable Space (m2)</span>
                     <span className='font-semibold text-gray-500'>{props.averageSpace} (m2)</span>
                 </div>
                 <div className='w-full flex justify-between items-center'>
-                    <span className='font-semibold text-base lg:text-lg'>Usable Percent</span>
+                    <span className='font-semibold text-base lg:text-lg'>Total Usable Space (%)</span>
                     <span className='font-semibold text-gray-500'>{props.usablePercent} (%)</span>
                 </div>
                 <div className='w-full flex justify-between items-center'>

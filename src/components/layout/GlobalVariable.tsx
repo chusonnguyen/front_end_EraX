@@ -11,6 +11,7 @@ const GlobalVariable = () => {
     const [numberCrates, setNumberCrates] = useState("")
     const [numberDoubleStacks, setNumberDoubleStack] = useState("")
     const [numberSingles, setNumberSingles] = useState("")
+    const [createdBy, setCreatedBy]= useState("")
     const {id} = useParams()
     const token = localStorage.getItem('token')
     let navigate = useNavigate()
@@ -36,6 +37,7 @@ const GlobalVariable = () => {
                     setNumberCrates(response.data.statistic[0].number_crates)
                     setNumberDoubleStack(response.data.statistic[0].number_stacks)
                     setNumberSingles(response.data.statistic[0].number_singles)
+                    setCreatedBy(response.data.statistic[0].created_by)
                 }
                 if(response.status == 401) {
                     localStorage.clear()
@@ -97,15 +99,19 @@ const GlobalVariable = () => {
                 </div>
                 <div className='w-full flex justify-between items-center'>
                     <span className='font-semibold text-lg'>4-way Lift</span>
-                    <span className='font-semibold text-gray-500'>4 users</span>
+                    <span className='font-semibold text-gray-500'>4</span>
                 </div>
+                {/* <div className='w-full flex justify-between items-center'>
+                    <span className='font-semibold text-lg'>Created By</span>
+                    <span className='font-semibold text-gray-500'>{createdBy}</span>
+                </div> */}
             </div>
             <div className='w-full pt-8 gap-4 flex flex-col'>
                 <div className='w-full flex justify-between items-center'>
                     <span className='font-semibold text-lg'>Created By</span>
-                    <span className='font-semibold text-gray-500'>Duc Ho Minh</span>
+                    <span className='font-semibold text-gray-500'>{createdBy}</span>
                 </div>
-                <div className='w-full flex justify-between items-center'>
+                {/* <div className='w-full flex justify-between items-center'>
                     <span className='font-semibold text-lg'>Last Modified By</span>
                     <div className="flex -space-x-4">
                         <img className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="http://localhost:3000/src/assets/images/avatar.png" alt=""/>
@@ -113,7 +119,7 @@ const GlobalVariable = () => {
                         <img className="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="http://localhost:3000/src/assets/images/avatar.png" alt=""/>
                         <a className="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+99</a>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     </div>

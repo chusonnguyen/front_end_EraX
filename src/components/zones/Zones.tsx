@@ -118,7 +118,7 @@ const Zones = (props) => {
 
   return (
     <div className='w-full h-full flex flex-col justify-start items-start px-6 overflow-y-auto'>
-      <div className='w-full flex justify-between items-center py-6'>
+      <div className='w-full flex justify-between items-center py-6 md:flex-row flex-col'>
         <nav className="flex" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li className="inline-flex items-center">
@@ -141,7 +141,7 @@ const Zones = (props) => {
             </li>
           </ol>
         </nav>
-        <NavLink to={`/project/${id}/create-zone`} type="button" className="px-6 py-3 rounded-lg bg-intel-blue hover:bg-blue-900 text-white">+ Create Zone</NavLink>
+        <NavLink to={`/project/${id}/create-zone`} type="button" className="md:mt-0 mt-6 px-6 py-3 rounded-lg bg-intel-blue hover:bg-blue-900 text-white">+ Create Zone</NavLink>
       </div>
       <div className="w-full h-full grid grid-cols-1 md:grid-cols-4 gap-10 mb-16">
         <div className='flex flex-col justify-start items-center gap-10 col-span-2 lg:col-span-1'>
