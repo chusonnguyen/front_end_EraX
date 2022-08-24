@@ -2,8 +2,15 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
+interface History {
+  id: number,
+  description: string,
+  user_id: string,
+  Time: string
+}
+
 const History = () => {
-  const [history, setHistory] = useState([])
+  const [history, setHistory] = useState<History[]>([])
   let navigate = useNavigate()
   const token=localStorage.getItem('token')
 

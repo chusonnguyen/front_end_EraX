@@ -5,31 +5,19 @@ import React,{useState,useEffect} from 'react'
 import {useNavigate,useParams} from 'react-router-dom'
 import axios from 'axios'
 
-const CurrentActivity = (props) => {
+interface History {
+  id: number,
+  project_id: number,
+  project_name: string,
+  description: string,
+  user_id: string,
+  username: string,
+  Time: string
+}
+
+const CurrentActivity = (props:{history:History[]}) => {
   const token = localStorage.getItem('token')
-  const [history,setHistory] = useState([])
-  const fetchData = async() => {
-    await axios.get('http://127.0.0.1:5000/project/history/1', {
-      headers: {
-        'x-access-token': `${token}`
-      }
-    }).then(
-      (res) => {
-        if(res.status == 200) {
-          setHistory(res.data)
-        }
-      },
-        (error) => {
-          console.log(error)
-        }
-      )
-      
-  }
 
-
-  useEffect(()=> {
-    fetchData()
-  },[])
   
   return (
     <div className='flex flex-col gap-2 w-full justify-center items-center'>
@@ -37,7 +25,7 @@ const CurrentActivity = (props) => {
           <span className="text-2xl font-bold">Activity</span>
           <NavLink to={'history'} className="text-sm text-gray-400">View all</NavLink>
       </div>
-      {history.map(data => {
+      {props.history.map(data => {
           return (
             <div className='w-full flex flex-col gap-2 justify-center items-center'>
               <div className='border w-full bg-white hover:shadow-md flex justify-start items-center overflow-hidden rounded-lg'>

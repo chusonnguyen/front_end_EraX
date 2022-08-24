@@ -4,7 +4,13 @@ import UsableSpace from './UsableSpace'
 import axios from 'axios'
 import { useNavigate,useParams } from 'react-router-dom'
 
-const LeftDashboard = (props:any) => {
+interface Card {
+    zone_name: string,
+    usable_space: number
+}
+  
+
+const LeftDashboard = (props:{data:Card[]}) => {
   return (
     <div className='w-full grid grid-cols-3 gap-10'>
         <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 col-span-3'>

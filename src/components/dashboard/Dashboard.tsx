@@ -4,20 +4,71 @@ import LeftDashboard from './LeftDashboard'
 import RightDashboard from './RightDashboard'
 import axios from 'axios'
 
+interface ProjectData {
+  project_id: number,
+  user_id: string,
+  project_name: string,
+  project_type: string,
+  address: string,
+  last_modified: string,
+  created_by: string
+}
+
+interface History {
+  id: number,
+  project_id: number,
+  project_name: string,
+  description: string,
+  user_id: string,
+  username: string,
+  Time: string
+}
+
+interface Card {
+  zone_name: string,
+  usable_space: number
+}
+
 const Dashboard = () => {
-  const [projectData,setProjectData] = useState([])
-  const [cardData, setCardData] = useState([])
+  const [projectData,setProjectData] = useState<ProjectData[]>([])
+  const [cardData, setCardData] = useState<Card[]>([])
   const [overviewData,setOverviewData] = useState({})
-  const [selected,setSelected] = useState('')
+  const [selected,setSelected] = useState()
+  const [totalZone,setTotalZone] = useState()
+  const [averageSpace,setAverageSpace] = useState()
+  const [averageRate,setAverageRate] = useState()
+  const [totalAccessed,setTotalAccessed] = useState()
+  const [createdOn,setCreatedOn] = useState("")
+  const [usablePercent, setUsablePercent] = useState()
   let navigate = useNavigate()
   const token = localStorage.getItem('token')
-  let id = useParams()
+  //let id = useParams()
   const handleChange = (e:any) => {
     navigate(`/${e.target.value}`)
     setSelected(e.target.value)
   }
 
-  const fetchProjects = async () => {
+  const [history,setHistory] = useState<History[]>([])
+
+  const fetchHistory = async(id:any) => {
+    await axios.get(`http://127.0.0.1:5000/project/history/${id}`, {
+      headers: {
+        'x-access-token': `${token}`
+      }
+    }).then(
+      (res) => {
+        if(res.status == 200) {
+          setHistory(res.data)
+        }
+      },
+        (error) => {
+          console.log(error)
+        }
+      )
+      
+  }
+
+  const fetchProjects = async (id:number) => {
     await axios.get(`http://127.0.0.1:5000/projects`, {
       headers: {
         'x-access-token': `${token}`
@@ -46,8 +97,8 @@ const Dashboard = () => {
     })
   }
 
-  const fetchZoneUsable = async () => {
-    await axios.get(`http://127.0.0.1:5000/dashboard/zoneusable/projectid=1`, {
+  const fetchZoneUsable = async (id:number) => {
+    await axios.get(`http://127.0.0.1:5000/dashboard/zoneusable/projectid=${id}`, {
         headers: {
             'x-access-token': `${token}`
         }
@@ -68,14 +119,9 @@ const Dashboard = () => {
     )
 }
 
-const [totalZone,setTotalZone] = useState()
-const [averageSpace,setAverageSpace] = useState()
-const [averageRate,setAverageRate] = useState()
-const [totalAccessed,setTotalAccessed] = useState()
-const [createdOn,setCreatedOn] = useState("")
-const [usablePercent, setUsablePercent] = useState()
-const fetchOverview = async () => {
-  await axios.get(`http://127.0.0.1:5000/dashboard/statistic/projectid=1`, {
+
+  const fetchOverview = async (id:number) => {
+  await axios.get(`http://127.0.0.1:5000/dashboard/statistic/projectid=${id}`, {
       headers: {
           'x-access-token': `${token}`
       }
@@ -99,18 +145,36 @@ const fetchOverview = async () => {
   )
 }
 
+
   useEffect(() => {
-    fetchProjects()
-    fetchZoneUsable()
-    fetchOverview()
-  },[])
+    console.log("selected")
+    console.log(selected)
+    if(selected == null) {
+      fetchProjects(1)
+      fetchHistory(1)
+      fetchZoneUsable(1)
+      fetchOverview(1)
+    } else {
+      fetchProjects(selected)
+      fetchHistory(selected)
+      fetchZoneUsable(selected)
+      fetchOverview(selected)
+    }
+    
+  },[selected])
+
+  const renderRightDashboard = () => {
+    return (
+      <RightDashboard history={history} usablePercent ={usablePercent} totalZone={totalZone} averageRate={averageRate} averageSpace={averageSpace} totalAccessed={totalAccessed} createdOn={createdOn}/>
+    )
+  }
 
   return (
     <div className="w-full h-full flex flex-col justify-start item-start px-6 overflow-y-auto">
       <div className='flex w-full justify-between items-center py-6'>
         <span className='text-2xl lg:text-3xl font-bold'>Dashboard</span>
         <select value={selected} onChange={handleChange} className="px-1 md:px-6 py-2 rounded-lg border focus:outline-none cursor-pointer" id="">
-          {projectData.map((data)=> (
+          {projectData?.map((data)=> (
               <option value={data.project_id}>{data.project_name}</option>
             ))}
         </select>
@@ -120,7 +184,7 @@ const fetchOverview = async () => {
           <LeftDashboard data={cardData} />
         </div>
         <div className='col-span-1 lg:col-span-2'>
-          <RightDashboard usablePercent ={usablePercent} totalZone={totalZone} averageRate={averageRate} averageSpace={averageSpace} totalAccessed={totalAccessed} createdOn={createdOn}/>
+          {renderRightDashboard()}
         </div>
       </div>
     </div>

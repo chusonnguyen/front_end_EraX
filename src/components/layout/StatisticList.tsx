@@ -2,32 +2,21 @@ import React, {useEffect,useState} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
+interface Data {
+  id: number,
+  zone_id: number,
+  crate_label: string,
+  tracking: number,
+  stacked: string,
+  width: number,
+  length: number,
+  x: number,
+  y: number,
+  rotation: number
+}
 
-const StatisticList = () => {
-    const token = localStorage.getItem('token')
-    const { id } = useParams()
 
-    const [dataMap, setDataMap] = useState([])
-    const fetchLayout = async () => {
-        await axios.get(`http://127.0.0.1:5000/playground/zoneid=${id}`, {
-          headers: {
-            'x-access-token': `${token}`
-          }
-        }).then(
-          (res) => {
-            console.log(res.status)
-            if(res.status === 200) {
-              setDataMap(res.data)
-            }
-            console.log(dataMap)
-          }
-        )
-      }
-    
-      useEffect(() => {
-        fetchLayout()
-        
-      },[])
+const StatisticList = (props:{map_data:Data[]}) => {
   return (
     <div className=' bg-white flex flex-col justify-start items-start w-full gap-4'>
         <span className='font-bold text-2xl'>Statistic</span>  
@@ -42,7 +31,7 @@ const StatisticList = () => {
                 </div>  
                 <div className='border-b-[1px] w-full my-2'></div>
                 <div className='flex flex-col justify-between w-full items-center gap-4 max-h-[500px] overflow-y-auto scrollbar-hide'>
-                    {dataMap.map((data, id) => {
+                    {props.map_data.map((data, id) => {
                         return (
                             <div key={id} className='grid grid-cols-7 w-full gap-3'>
                                 <span>{data.tracking}</span>

@@ -1,6 +1,19 @@
 import React from 'react'
 
-const RawList = (props) => {
+interface Data {
+    id: number,
+    zone_id: number,
+    crate_label: string,
+    tracking: number,
+    stacked: string,
+    width: number,
+    length: number,
+    x: number,
+    y: number,
+    rotation: number
+  }
+
+const RawList = (props:{map_data:Data[]}) => {
   return (
     <div className=' bg-white flex flex-col justify-start items-start w-full gap-4 col-span-4 md:col-span-1'>
         <span className='font-bold text-2xl'>Raw Tool List</span>  

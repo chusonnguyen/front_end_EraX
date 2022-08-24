@@ -8,15 +8,55 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 
+interface History {
+  id: number,
+  project_id: number,
+  project_name: string,
+  description: string,
+  user_id: string,
+  username: string,
+  Time: string
+}
 
-const Zones = (props) => {
+interface Project {
+  project_id: number,
+  user_id: string,
+  project_name: string,
+  project_type: string,
+  address: string,
+  last_modified: string,
+  created_by: string
+}
+
+interface Zone {
+  zone_id:       number,
+  project_id:    number,
+  zone_name:     string,
+  zone_type:     string,
+  width:         number,
+  length:        number,
+  totalPoll:     number,
+  pollRow:       number,
+  pollX:         number,
+  pollY:         number,
+  pollW:         number,
+  pollL:         number,
+  pollGap:       number,
+  pollRowGap:    number,
+  user_id:       string,
+  last_modified: string,
+  created_by:    string,
+}
+
+
+const Zones = () => {
   let navigate = useNavigate()
   let {id} = useParams()
   const [viewLog, setViewLog] = useState(false)
-  const [zoneData, setZoneData] = useState([])
-  const [projectData, setProjectData] = useState([])
+  const [zoneData, setZoneData] = useState<Zone[]>([])
+  const [projectData, setProjectData] = useState<Project[]>([])
   const token = localStorage.getItem("token")
-  const [history, setHistory] = useState([])
+  const [history, setHistory] = useState<History[]>([])
 
   const fetchToken = async () => {
     if(!token) {
@@ -212,7 +252,7 @@ const Zones = (props) => {
             <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
               {zoneData.map((zone, zoneid) => {
                 return (
-                  <NavLink key={zoneid} to={`/project/${id}/zone/${zone.zone_id}`} className="bg-white rounded-lg border dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
+                  <NavLink key={zoneid} to={`/project/${id}/zone/${zone.zone_id}`} state={{projectID: id}}  className="bg-white rounded-lg border dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
                   <div className="flex w-full flex-col gap-1 p-5">
                     <span className='text-gray-600 font-semibold uppercase'>{zone.zone_type}</span>
                     <div className='w-full flex justify-between items-center'>
@@ -254,7 +294,7 @@ const Zones = (props) => {
               
             }
             <div className='w-full flex flex-col gap-2 justify-center items-center pb-6'>
-              {history.map(h => {
+              {history.map((h) => {
                 return (
                   <div className='px-4 md:px-6 py-2 md:py-4 border w-full bg-white hover:shadow-md'>
                     <div className='w-full flex justify-between'>

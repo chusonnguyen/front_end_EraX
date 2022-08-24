@@ -10,7 +10,7 @@ const RightDashboard = (props:any) => {
   return (
     <div className='flex flex-col w-full justify-center items-center gap-10'>
         <Overview usablePercent={props.usablePercent} totalZone={props.totalZone} averageRate={props.averageRate} averageSpace={props.averageSpace} totalAccessed={props.totalAccessed} createdOn={props.createdOn}/>
-        <CurrentActivity />
+        <CurrentActivity history={props.history}/>
     </div>
   )
 }

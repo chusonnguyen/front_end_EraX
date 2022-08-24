@@ -1,6 +1,6 @@
 import { KeyboardDoubleArrowUpOutlined } from '@mui/icons-material'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import axios from 'axios'
 
 interface CrateItem {
@@ -33,7 +33,7 @@ interface AilseItem {
   y: number
 }
 
-const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[], ailse_final: AilseItem[], width_data: number, length_data: number }) => {
+const Playground = (props: { projectID: number, boxses_final: CrateItem[], poles_final: PoleItem[], ailse_final: AilseItem[], width_data: number, length_data: number }) => {
   console.log("Playground")
   const options = [
     { value: 'Yes', text: 'Yes' },
@@ -57,23 +57,28 @@ const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[],
   const [stack, setStack] = useState(options[0].value)
   const [rotationInput, setRotationInput] = useState(optionsRotation[0].value)
   const [error, setError] = useState("")
+  const [errorSave, setErrorSave] = useState("")
   let { id } = useParams()
   let navigate = useNavigate()
 
   let ctx: any = null;
   let isDown: boolean | null = false;
-  let dragTarget: CrateItem 
+  let dragTarget: CrateItem
   let startX: number | null = null
   let startY: number | null = null
-  let currentLocX:number = 0
-  let currentLocY:number = 0
+  let currentLocX: number = 0
+  let currentLocY: number = 0
   let current_box = null
   let isDragging = false
   const [isLoading, setIsloading] = useState(true)
   let prviousx: number = 0
   let prviousy: number = 0
-  let prviousw:number = 0
-  let prviousl:number = 0
+  let prviousw: number = 0
+  let prviousl: number = 0
+  const location = useLocation();
+  // const  projectID  = location.state;
+  // console.log("ProjectID")
+  // console.log(projectID)
 
   const renderCanvas = () => {
     widthZone = props.width_data * ratio
@@ -151,7 +156,7 @@ const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[],
     console.log("inbound")
     console.log(x)
     console.log(y)
-    if (crateLabel != "" && x != null && y != null && width != "" && length != "" && (stack == 'Yes' || stack == 'No' && (rotationInput == 1 || rotationInput == 0))) {
+    if (crateLabel != "" && x != null && y != null && trackingNumber != "" && width != "" && length != "" && (stack == 'Yes' || stack == 'No' && (rotationInput == 1 || rotationInput == 0))) {
       await axios.post(`http://127.0.0.1:5000/playground/${id}`, data, {
         headers: headers
       })
@@ -204,6 +209,36 @@ const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[],
     }
   }
 
+
+  const saveLayout = async (e: any) => {
+    e.preventDefault()
+    console.log("save layout")
+    await axios.post(`http://127.0.0.1:5000/playground/savelayout/${id}`, props.boxses_final, {
+      headers: headers
+    })
+      .then((response) => {
+        console.log(response.data);
+        console.log(response.status)
+        if (response.status == 200) {
+          console.log(response.data)
+          setErrorSave("Done!!")
+        }
+
+        if (response.status == 401) {
+          localStorage.clear()
+          navigate('/login')
+        }
+      }, (error) => {
+        console.log(error.response.data);
+        if (error.response.status == 500) {
+          setErrorSave(error.response.data.message)
+        } else {
+          setErrorSave("No connection")
+        }
+      });
+
+  }
+
   // initialize the canvas context
   useEffect(() => {
     console.log("ComponentDidMount()")
@@ -231,7 +266,7 @@ const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[],
     }
 
     canvasEle.addEventListener('mousedown', (event: MouseEvent) => {
-      handleMouseDown(event,canvasEle)
+      handleMouseDown(event, canvasEle)
     })
 
     canvasEle.addEventListener('mousemove', (event: MouseEvent) => {
@@ -246,7 +281,7 @@ const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[],
       handleMouseUp(event)
     })
 
-  },[1])
+  }, [1])
 
   const draw = (canvasEle: HTMLCanvasElement) => {
     ctx.clearRect(0, 0, canvasEle.clientWidth, canvasEle.clientHeight);
@@ -254,8 +289,8 @@ const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[],
     props.boxses_final.map(info => drawFillRect(info));
     setIsloading(false)
   }
-
-  const drawPole = (pole: PoleItem) => {
+  const drawPole = (pole
+    : PoleItem) => {
     console.log("drawPole")
     let {
       id,
@@ -333,15 +368,19 @@ const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[],
     return isTarget;
   }
 
-  const handleMouseDown = (event: MouseEvent, canvasEle:HTMLCanvasElement) => {
+  const handleMouseDown = (event: MouseEvent, canvasEle: HTMLCanvasElement) => {
     console.log("handleMouseDown")
     var rect = canvasEle.getBoundingClientRect();
     startX = event.clientX - rect.left;
     startY = event.clientY - rect.top;
+    var rawX = startX / ratio
+    var rawY = startY / ratio
+    setX(Number(rawX.toFixed(2)))
+    setY(Number(rawY.toFixed(2)))
     hitBox(startX, startY)
   }
 
-  const handleMouseMove = (event: MouseEvent, canvasEle:HTMLCanvasElement) => {
+  const handleMouseMove = (event: MouseEvent, canvasEle: HTMLCanvasElement) => {
     console.log("handleMouseMove")
     var rect = canvasEle.getBoundingClientRect();
     if (isDragging) {
@@ -368,7 +407,7 @@ const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[],
 
   const handleMouseUp = (e: any) => {
     console.log("handleMouseUp")
-    if (!isDragging) { 
+    if (!isDragging) {
       return;
 
     }
@@ -380,13 +419,20 @@ const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[],
       <div className='w-full flex flex-col gap-6'>
         <div className='flex justify-between items-center w-full'>
           <span className='font-bold text-2xl'>Playground</span>
-          <button id="download" className='bg-intel-blue px-4 py-2 rounded-lg text-white hover:bg-blue-800' onClick={download_image} >Save Layout</button>
+          <button id="download" className='bg-intel-blue px-4 py-2 rounded-lg text-white hover:bg-blue-800' onClick={download_image} >Download Layout</button>
+
         </div>
 
+
         {renderCanvas()}
+        <div className='flex justify-between items-center w-full'>
+          <span className='text-2xl' style={{ color: 'red', fontWeight: 'bold' }}>{errorSave}</span>
+          <button id="save" className='bg-intel-blue px-4 py-2 rounded-lg text-white hover:bg-blue-800' onClick={saveLayout} >Save Layout</button>
+        </div>
 
         {/* INBOUND OUTBOUND */}
         <div className='w-full flex h-6 flex-col pb-80 gap-10'>
+
           {/* INBOUND CRATE + */}
           <div className='flex flex-col w-full justify-center items-center gap-5'>
             <h3 style={{ color: 'red', fontWeight: 'bold' }}>{error}</h3>
@@ -396,11 +442,11 @@ const Playground = (props: { boxses_final: CrateItem[], poles_final: PoleItem[],
                   className="block text-sm font-medium text-gray-700">Crate Label</label>
                 <input onChange={onChangeInputCrateLabel} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Enter crate label' />
               </div>
-              {/* <div className="col-span-3">
+              <div className="col-span-3">
                 <label htmlFor="project-name"
                   className="block text-sm font-medium text-gray-700">Tracking Number</label>
                 <input onChange={onChangeInputTrackingNumber} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full focus:outline-none border border-gray-300 focus:border sm:text-sm rounded-md px-3 py-2" placeholder='Enter tracking number' />
-              </div> */}
+              </div>
               <div className="col-span-3">
                 <label htmlFor="project-name"
                   className="block text-sm font-medium text-gray-700">X Position</label>

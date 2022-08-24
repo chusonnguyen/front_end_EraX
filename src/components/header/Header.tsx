@@ -6,15 +6,15 @@ import axios from 'axios'
 const Header = () => {
   let navigate = useNavigate()
 
-  const [openDropdown, setOpenDropdown] = useState()
+  const [openDropdown, setOpenDropdown] = useState<Boolean>()
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [searchInput, setSearchInput] = useState("")
-  const [projectData, setProjectData] = useState([])
 
   const token=localStorage.getItem('token')
 
-  const ref = useRef(null);
+  const ref = useRef<any>(null);
+
   const handleClickOutside = (event:any) => {
     if (ref.current && !ref.current.contains(event.target)) {
       setOpenDropdown(false);
@@ -68,31 +68,7 @@ const Header = () => {
     )
   }
 
-  const fetchProjects = async () => {
-    await axios.get(`http://127.0.0.1:5000/projects`, {
-      headers: {
-        'x-access-token': `${token}`
-      }
-    })
-    .then((res: any) => {
-      console.log(
-        "project" + res.status
-      )
-      console.log(res.data)
-      if(res.status == 200) {
-        const project = res.data
-        setProjectData(project)
-      }
-      if(res.status == 401) {
-        navigate('/login')
-        localStorage.clear()
-      }
-      
-    })
-  }
-
   useEffect(() => {
-    fetchProjects()
     fetchUser()
     document.addEventListener('click', handleClickOutside, true);
     return () => {
@@ -121,35 +97,6 @@ const Header = () => {
                 <span className='font-bold text-xl'>Projects</span>
               </div>
               
-              <div className='flex flex-col divide-y w-full'>
-                { projectData.filter((project:Project) => {
-                    if (searchInput == "") {
-                      return searchInput
-                    } else if (project.project_name.toLowerCase().includes(searchInput.toLowerCase())) {
-                      return project
-                    }
-                  }).map((project,key) => {
-                    return (
-                      <NavLink key={key} to={`/project/${project.project_id}`} className="w-full bg-white dark:bg-gray-800 dark:border-gray-700 overflow-hidden hover:bg-slate-50 hover:rounded-lg p-2">
-                        <div className="flex w-full flex-col gap-1 py-4">
-                          
-                          <div className='w-full flex justify-between items-center'>
-                            <div className='flex flex-col w-full text-base'>
-                              <span className='text-gray-600 font-semibold uppercase text-sm'>Warehouse</span>
-                              <span className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">{project.project_name}</span>
-                            </div>
-                            <div className='text-xs'>
-                              <p className="font-normal text-gray-700 dark:text-gray-400">Created by</p>
-                              <span className='font-bold'>{project.created_by}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </NavLink>
-                    )
-                  })
-                }
-              </div>
-
             </div>}
 
 

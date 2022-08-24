@@ -6,7 +6,11 @@ import RawList from './RawList'
 import StatisticList from './StatisticList'
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios'
-import { NavLink, useNavigate, useParams } from 'react-router-dom'
+import { NavLink, useNavigate, useParams,useLocation } from 'react-router-dom'
+
+interface CustomizedState {
+  projectID: number
+}
 
 interface Data {
   id: number,
@@ -57,7 +61,7 @@ const Layout = () => {
   const [isLoadingPlayground, setIsLoadingPlayground] = useState(true)
   const [isLoadingPole, setIsLoadingPole] = useState(true)
   const [isLoadingAilse, setIsLoadingAilse] = useState(true)
-  const [file, setFile] = useState()
+  const [file, setFile] = useState<File & { lastModifiedDate: Date}>()
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [w, setW] = useState("")
   const [l, setL] = useState("")
@@ -65,9 +69,17 @@ const Layout = () => {
   const [dataPlay, setDataPlay] = useState<Play[]>([])
   const [dataPole, setDataPole] = useState<Pole[]>([])
   const [dataAilse, setDataAilse] = useState<Ailse[]>([])
-  const [width, setWidth] = useState()
-  const [length, setLength] = useState()
+  const [width, setWidth] = useState<number>()
+  const [length, setLength] = useState<number>()
   const { id } = useParams()
+
+  const location = useLocation();
+  const state = location.state as CustomizedState;
+  const {projectID} = state
+  console.log(projectID)
+
+  // const projectID = location.state.projectID
+  
 
   const token = localStorage.getItem('token')
   const formData = new FormData();
@@ -81,24 +93,12 @@ const Layout = () => {
 
   }
 
-  // const onChangeW = (e: any) => {
-  //   setW(e.target.value)
-  //   console.log(w)
-  // }
-
-  // const onChangeL = (e: any) => {
-  //   setL(e.target.value)
-  //   console.log(l)
-  // }
-
 
   const handleSubmit = async (e: any) => {
     setIsLoading(true)
     e.preventDefault()
-    formData.append('file', file)
-    // formData.append('w', w)
-    // formData.append('l', l)
-    formData.append('zone_id', id)
+    formData.append('file', file as Blob)
+    formData.append('zone_id', id as string)
     await axios.post(`http://127.0.0.1:5000/upload/${id}`, formData, {
       headers: {
         'x-access-token': `${token}`
@@ -262,7 +262,7 @@ const Layout = () => {
 
   function renderPlayground() {
     if (isLoadingPlayground == false) {
-      return <Playground boxses_final={boxses_final} poles_final={poles_final} ailse_final={ailse_final} width_data={width} length_data={length} />
+      return <Playground projectID={projectID} boxses_final={boxses_final} poles_final={poles_final} ailse_final={ailse_final} width_data={width as number} length_data={length as number} />
     } else {
       return <h2>NULL DATA</h2>
     }
