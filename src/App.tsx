@@ -8,11 +8,12 @@ function App() {
 
   return (
     <div className="w-screen h-screen overflow-hidden flex justify-center items-center">
-      <Routes>
+      {/* <Routes>
         <Route path='login' element={<Login />} />
         <Route path='register' element={<Register />} />
         <Route path='*' element={<Home />} />
-      </Routes>
+      </Routes> */}
+      <h1>Con cac</h1>
     </div>
   )
 }
