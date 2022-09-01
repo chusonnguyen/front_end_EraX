@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "./static/css/main.631ee5fa.css",
+    "main.js": "./static/js/main.5d78feed.js",
+    "static/media/intel-project.jpg": "./static/media/intel-project.6358f1e487b50fcdd759.jpg",
+    "index.html": "./index.html",
+    "main.631ee5fa.css.map": "./static/css/main.631ee5fa.css.map",
+    "main.5d78feed.js.map": "./static/js/main.5d78feed.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.631ee5fa.css",
+    "static/js/main.5d78feed.js"
+  ]
+}
