@@ -44,7 +44,7 @@ const EditZone = () => {
         }
         if (zoneName != "" && zoneType != "") {
             console.log("Worked")
-            axios.put(`http://127.0.0.1:5000/refreshedzone/${id}`, data, {
+            axios.put(`https://intel-backend.herokuapp.com/refreshedzone/${id}`, data, {
                 headers: headers
             })
                 .then((response) => {
@@ -63,7 +63,7 @@ const EditZone = () => {
 
     const fetchZone = async () => {
         
-        await axios.get(`http://127.0.0.1:5000/refreshedzone/${id}`, {
+        await axios.get(`https://intel-backend.herokuapp.com/refreshedzone/${id}`, {
             headers: headers
         })
             .then((res: any) => {

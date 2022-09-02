@@ -100,7 +100,7 @@ const CreateZone = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         if(zoneName != "" && zoneType != "" && zoneWidth != "" && zoneLength != "") {
-            await axios.post('http://127.0.0.1:5000/zones', data, {
+            await axios.post('https://intel-backend.herokuapp.com/zones', data, {
             headers:headers
             })
             .then((response) => {

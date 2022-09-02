@@ -41,7 +41,7 @@ const CreateProject = () => {
           setError("Empty Space")
       }
       if(projectName != "" && projectType != "" && projectAddress != "") {
-          axios.post('http://127.0.0.1:5000/projects', data, {
+          axios.post('https://intel-backend.herokuapp.com/projects', data, {
       headers:headers
       })
       .then((response) => {

@@ -51,7 +51,7 @@ const Dashboard = () => {
   const [history,setHistory] = useState<History[]>([])
 
   const fetchHistory = async(id:any) => {
-    await axios.get(`http://127.0.0.1:5000/project/history/${id}`, {
+    await axios.get(`https://intel-backend.herokuapp.com/project/history/${id}`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -69,7 +69,7 @@ const Dashboard = () => {
   }
 
   const fetchProjects = async (id:number) => {
-    await axios.get(`http://127.0.0.1:5000/projects`, {
+    await axios.get(`https://intel-backend.herokuapp.com/projects`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -98,7 +98,7 @@ const Dashboard = () => {
   }
 
   const fetchZoneUsable = async (id:number) => {
-    await axios.get(`http://127.0.0.1:5000/dashboard/zoneusable/projectid=${id}`, {
+    await axios.get(`https://intel-backend.herokuapp.com/dashboard/zoneusable/projectid=${id}`, {
         headers: {
             'x-access-token': `${token}`
         }
@@ -121,7 +121,7 @@ const Dashboard = () => {
 
 
   const fetchOverview = async (id:number) => {
-  await axios.get(`http://127.0.0.1:5000/dashboard/statistic/projectid=${id}`, {
+  await axios.get(`https://intel-backend.herokuapp.com/dashboard/statistic/projectid=${id}`, {
       headers: {
           'x-access-token': `${token}`
       }

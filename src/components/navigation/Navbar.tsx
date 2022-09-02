@@ -14,7 +14,7 @@ const Navbar = () => {
   let navigate = useNavigate()
 
   const logout = async () => {
-    await axios.get(`http://127.0.0.1:5000/logout`, {
+    await axios.get(`https://intel-backend.herokuapp.com/logout`, {
       headers: {
         'x-access-token': `${token}`
       }

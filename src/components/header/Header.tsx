@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   const fetchUser = async () => {
-    await axios.get('http://127.0.0.1:5000/a_user', {
+    await axios.get('https://intel-backend.herokuapp.com/a_user', {
       headers: {
         'x-access-token': `${token}`
       }
@@ -47,7 +47,7 @@ const Header = () => {
   }
 
   const logout = async () => {
-    await axios.get(`http://127.0.0.1:5000/logout`, {
+    await axios.get(`https://intel-backend.herokuapp.com/logout`, {
       headers: {
         'x-access-token': `${token}`
       }

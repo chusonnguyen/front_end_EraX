@@ -23,7 +23,7 @@ const Projects = () => {
     if(!token) {
       navigate('/login')
     }
-    await axios.get(`http://127.0.0.1:5000/verify-token`, {
+    await axios.get(`https://intel-backend.herokuapp.com/verify-token`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -48,7 +48,7 @@ const Projects = () => {
   }
 
   const fetchProjects = async () => {
-    await axios.get(`http://127.0.0.1:5000/projects`, {
+    await axios.get(`https://intel-backend.herokuapp.com/projects`, {
       headers: {
         'x-access-token': `${token}`
       }

@@ -62,7 +62,7 @@ const Zones = () => {
     if(!token) {
       navigate('/login')
     }
-    await axios.get(`http://127.0.0.1:5000/verify-token`, {
+    await axios.get(`https://intel-backend.herokuapp.com/verify-token`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -88,7 +88,7 @@ const Zones = () => {
   }
 
   const fetchHistory = async () => {
-    await axios.get(`http://127.0.0.1:5000/project/history/${id}`, {
+    await axios.get(`https://intel-backend.herokuapp.com/project/history/${id}`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -107,7 +107,7 @@ const Zones = () => {
   }
 
   const fetchZones = async () => {
-    await axios.get(`http://127.0.0.1:5000/zones/project=${id}`, {
+    await axios.get(`https://intel-backend.herokuapp.com/zones/project=${id}`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -131,7 +131,7 @@ const Zones = () => {
   }
 
   const fetchProjects = async () => {
-    await axios.get(`http://127.0.0.1:5000/project/${id}`, {
+    await axios.get(`https://intel-backend.herokuapp.com/project/${id}`, {
       headers: {
         'x-access-token': `${token}`
       }

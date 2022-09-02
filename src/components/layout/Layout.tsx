@@ -99,7 +99,7 @@ const Layout = () => {
     e.preventDefault()
     formData.append('file', file as Blob)
     formData.append('zone_id', id as string)
-    await axios.post(`http://127.0.0.1:5000/upload/${id}`, formData, {
+    await axios.post(`https://intel-backend.herokuapp.com/upload/${id}`, formData, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -122,7 +122,7 @@ const Layout = () => {
   }
 
   const fetchAilse = async () => {
-    await axios.get(`http://127.0.0.1:5000/ailse/${id}`, {
+    await axios.get(`https://intel-backend.herokuapp.com/ailse/${id}`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -140,7 +140,7 @@ const Layout = () => {
   }
 
   const fetchLayout = async () => {
-    await axios.get(`http://127.0.0.1:5000/layout/zoneid=${id}`, {
+    await axios.get(`https://intel-backend.herokuapp.com/layout/zoneid=${id}`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -158,7 +158,7 @@ const Layout = () => {
   }
 
   const fetchPole = async () => {
-    await axios.get(`http://127.0.0.1:5000/pole/${id}`, {
+    await axios.get(`https://intel-backend.herokuapp.com/pole/${id}`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -177,7 +177,7 @@ const Layout = () => {
 
   //api playground: http://127.0.0.1:5000/playground/zoneid=${id}
   const fetchPLayGround = async () => {
-    await axios.get(`http://127.0.0.1:5000/playground/zoneid=${id}`, {
+    await axios.get(`https://intel-backend.herokuapp.com/playground/zoneid=${id}`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -193,7 +193,7 @@ const Layout = () => {
   }
 
   const fetchZone = async () => {
-    await axios.get(`http://127.0.0.1:5000/refreshedzone/${id}`, {
+    await axios.get(`https://intel-backend.herokuapp.com/refreshedzone/${id}`, {
       headers: {
         'x-access-token': `${token}`
       }

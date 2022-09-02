@@ -12,7 +12,7 @@ const Login = () => {
   useEffect(() => {
     const fetchToken = async () => {
         const token=localStorage.getItem('token')
-        await axios.get(`http://127.0.0.1:5000/verify-token`, {
+        await axios.get(`https://intel-backend.herokuapp.com/verify-token`, {
           headers: {
             'x-access-token': `${token}`
           }
@@ -49,7 +49,7 @@ const onChangePassword = (e: { target: { value: any } }) => {
 const handleSubmit = async (e: any) => {
   e.preventDefault()
   if(password != "" && email != "") {
-      await axios.get('http://127.0.0.1:5000/login', {
+      await axios.get('https://intel-backend.herokuapp.com/login', {
           auth: {
               username: email,
               password: password

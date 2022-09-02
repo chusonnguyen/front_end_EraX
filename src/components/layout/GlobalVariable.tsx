@@ -17,7 +17,7 @@ const GlobalVariable = () => {
     let navigate = useNavigate()
 
     const fetchStatistic = async () => {
-        await axios.get(`http://127.0.0.1:5000/stats/zoneid=${id}`, {
+        await axios.get(`https://intel-backend.herokuapp.com/stats/zoneid=${id}`, {
             headers: {
                 'x-access-token': `${token}`
               }

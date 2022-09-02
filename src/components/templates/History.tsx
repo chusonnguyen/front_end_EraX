@@ -15,7 +15,7 @@ const History = () => {
   const token=localStorage.getItem('token')
 
   const fetchHistory = async () => {
-    await axios.get(`http://127.0.0.1:5000/history/`, {
+    await axios.get(`https://intel-backend.herokuapp.com/history/`, {
       headers: {
         'x-access-token': `${token}`
       }
@@ -37,7 +37,7 @@ const History = () => {
     if(!token) {
       navigate('/login')
     }
-    await axios.get(`http://127.0.0.1:5000/verify-token`, {
+    await axios.get(`https://intel-backend.herokuapp.com/verify-token`, {
       headers: {
         'x-access-token': `${token}`
       }

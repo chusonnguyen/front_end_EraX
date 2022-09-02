@@ -13,7 +13,7 @@ const Register = () => {
   useEffect(() => {
     const fetchToken = async () => {
         const token=localStorage.getItem('token')
-        await axios.get(`http://127.0.0.1:5000/verify-token`, {
+        await axios.get(`https://intel-backend.herokuapp.com/verify-token`, {
           headers: {
             'x-access-token': `${token}`
           }
@@ -71,7 +71,7 @@ const handleSubmit = async (e: any) => {
   e.preventDefault()
   if(password != "" && confirmPassword != "" && username != "" && email != "") {
     if(password == confirmPassword) {
-      await axios.post('http://127.0.0.1:5000/register', data, {
+      await axios.post('https://intel-backend.herokuapp.com/register', data, {
         headers:headers
       })
         .then((response) => {

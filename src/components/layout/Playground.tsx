@@ -157,7 +157,7 @@ const Playground = (props: { projectID: number, boxses_final: CrateItem[], poles
     console.log(x)
     console.log(y)
     if (crateLabel != "" && x != null && y != null && trackingNumber != "" && width != "" && length != "" && (stack == 'Yes' || stack == 'No' && (rotationInput == 1 || rotationInput == 0))) {
-      await axios.post(`http://127.0.0.1:5000/playground/${id}`, data, {
+      await axios.post(`https://intel-backend.herokuapp.com/playground/${id}`, data, {
         headers: headers
       })
         .then((response) => {
@@ -187,7 +187,7 @@ const Playground = (props: { projectID: number, boxses_final: CrateItem[], poles
   const outBounce = async (e: any) => {
     e.preventDefault()
     if (crateLabel != "") {
-      await axios.delete(`http://127.0.0.1:5000/playground/${id}/${crateLabel}`, {
+      await axios.delete(`https://intel-backend.herokuapp.com/playground/${id}/${crateLabel}`, {
         headers: headers
       })
         .then((response) => {
@@ -213,7 +213,7 @@ const Playground = (props: { projectID: number, boxses_final: CrateItem[], poles
   const saveLayout = async (e: any) => {
     e.preventDefault()
     console.log("save layout")
-    await axios.post(`http://127.0.0.1:5000/playground/savelayout/${id}`, props.boxses_final, {
+    await axios.post(`https://intel-backend.herokuapp.com/playground/savelayout/${id}`, props.boxses_final, {
       headers: headers
     })
       .then((response) => {
