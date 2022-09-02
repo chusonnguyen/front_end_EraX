@@ -22,7 +22,7 @@ const Home = () => {
         <Header />
         <div className="w-full h-full flex justify-center items-center bg-white overflow-y-hidden">
           <Routes>
-            <Route path='*' element={<Dashboard />} />
+            <Route path='/' element={<Dashboard />} />
             <Route path='history' element={<History />} />
             <Route path='projects' element={<Projects />} />
             <Route path='profile' element={<UserProfile />} />
